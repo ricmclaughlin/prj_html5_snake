@@ -4,8 +4,54 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>prj_html5_snake</title>
+    <title>Canvas</title>
+    <style>
+      canvas {
+        border: black 2px solid;
+        
+      }
+    </style>
+    <script>
+      var theCanvas;
+      var theCanvasContext;
 
+      function init() {
+        theCanvas = document.getElementById("myCanvas");
+        theCanvasContext = theCanvas.getContext('2d');
+        draw();
+      }
+
+      function draw (){
+        var posX = 0;
+        var posY = 0;
+        setInterval(function(){
+          posY += 1;
+          posX += 1;
+          
+          theCanvasContext.fillStyle = "black";
+          theCanvasContext.fillRect(0, 0, theCanvas.width, theCanvas.height);
+
+          theCanvasContext.fillStyle="white";
+          theCanvasContext.beginPath();
+          theCanvasContext.arc(posX, 120, 55, 0, Math.PI * 2);
+          theCanvasContext.fill();
+
+          theCanvasContext.fillStyle="red";
+          theCanvasContext.beginPath();
+          theCanvasContext.arc(150, posY, 78, 0, Math.PI * 2);
+          theCanvasContext.fill();
+
+          theCanvasContext.fillStyle="blue";
+          theCanvasContext.beginPath();
+          theCanvasContext.arc(posX, posY, 55, 0, Math.PI * 2);
+          theCanvasContext.fill();
+
+        }, 30);
+
+      }
+
+
+    </script>
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
@@ -22,26 +68,14 @@
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
-  <body>
+  <body onload="init()">
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     
-    <div class="container">
-      <div id="overlay">
-        Your final score:<span id="final_score"></span> <br>
-        <a href="#" onClick="window.location.reload()">Click to play again!</a>
-      </div>  
-      <canvas id="canvas" width="600" height="450">
-        Your browser does not support the Canvas Element.
-      </canvas>
-      <div id="stats">
-        <div id="score"></div>
-        <div id="highscore"></div>
-        <button onClick="resetScore()" id="reset_score">Reset High Score</button>
-      </div>
-      
-    </div>
+    <canvas id="myCanvas" width="600" height="400">
+      <p>Sorry your Browser does not support the Canvas browser feature... </p>
+    </canvas>
     
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -59,7 +93,6 @@
     <!-- endbuild -->
     
     <!-- build:js scripts/main.js -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
   </body>
